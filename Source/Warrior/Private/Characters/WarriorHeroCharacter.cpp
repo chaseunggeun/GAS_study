@@ -12,6 +12,8 @@
 #include "WarriorGameplayTags.h"
 
 #include "WarriorDebugHelper.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "DataAssets/StartUpData/DataAsset_StartUpDataBase.h"
 
 AWarriorHeroCharacter::AWarriorHeroCharacter()
 {
@@ -36,6 +38,26 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f; // 걷기 중 감속도 설정
 }
 
+void AWarriorHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (!CharacterStartUpData.IsNull()) // 캐릭터 시작 데이터가 비어있지 않으면 (유효한 데이터가 있으면).
+	{
+		if (UDataAsset_StartUpDataBase* LoadedData = CharacterStartUpData.LoadSynchronous()) // 시작 데이터 에셋을 동기적으로 로드함. 로드 성공하면.
+		{
+			LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent); // 로드된 데이터 에셋에서 어빌리티 시스템 컴포넌트에 어빌리티를 부여함.
+		}
+	}
+	// if (WarriorAbilitySystemComponent && WarriorAttributeSet)
+	// {
+	// 	const FString ASCText = FString::Printf(TEXT("Owner Actor: %s, AvatarActor: %s"), *WarriorAbilitySystemComponent->GetOwnerActor()->GetActorLabel(), *WarriorAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
+	// 	Debug::Print(TEXT("Ability system component valid. ") + ASCText, FColor::Green);
+	// 	Debug::Print(TEXT("AttributeSet valid. ") + ASCText, FColor::Green);
+	// }
+	
+}
+
 void AWarriorHeroCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid data asset as input config")); // 입력 설정 데이터 에셋이 할당되었는지 확인.
@@ -57,8 +79,6 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 void AWarriorHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	Debug::Print(TEXT("Working"));
 }
 
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
