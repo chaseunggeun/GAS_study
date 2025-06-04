@@ -6,6 +6,11 @@
 namespace WarriorGameplayTags
 {
 	/* Input Tags */
-	UE_DEFINE_GAMEPLAY_TAG(InputTag_Move, "InputTag.Move") // Move 태그 정의
-	UE_DEFINE_GAMEPLAY_TAG(InputTag_Look, "InputTag.Look") // Look 태그 정의
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Move, "InputTag.Move"); // Move 태그 정의
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Look, "InputTag.Look"); // Look 태그 정의
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_EquipAxe, "InputTag.EquipAxe");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_UnequipAxe, "InputTag.UnequipAxe");
+
+	/* Player Tags */
+	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Axe, "Player.Weapon.Axe"); // Look 태그 정의
 }

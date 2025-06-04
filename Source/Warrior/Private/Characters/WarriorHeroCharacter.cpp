@@ -10,10 +10,11 @@
 #include "DataAssets/Input/DataAsset_InputConfig.h"
 #include "Components/Input/WarriorInputComponent.h"
 #include "WarriorGameplayTags.h"
-
-#include "WarriorDebugHelper.h"
+#include "Components/Combat/HeroCombatComponent.h"
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "DataAssets/StartUpData/DataAsset_StartUpDataBase.h"
+
+#include "WarriorDebugHelper.h"
 
 AWarriorHeroCharacter::AWarriorHeroCharacter()
 {
@@ -36,6 +37,8 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 500.f, 0.f); // 회전 속도 설정
 	GetCharacterMovement()->MaxWalkSpeed = 400.f; // 최대 걷기 속도 설정
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f; // 걷기 중 감속도 설정
+
+	HeroCombatComponent = CreateDefaultSubobject<UHeroCombatComponent>(TEXT("UHeroCombatComponent"));
 }
 
 void AWarriorHeroCharacter::PossessedBy(AController* NewController)
