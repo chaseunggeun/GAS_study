@@ -43,7 +43,7 @@ void UWarriorAbilitySystemComponent::GrantHeroWeaponAbilities(
 		AbilitySpec.Level = ApplyLevel; // 어빌리티 레벨 설정
 		AbilitySpec.DynamicAbilityTags.AddTag(AbilitySet.InputTag); // 어빌리티 스펙에 입력 태그 동적으로 추가
        
-		GiveAbility(AbilitySpec); // 어빌리티 시스템 컴포넌트에 어빌리티 스펙 부여
+		//GiveAbility(AbilitySpec); // 어빌리티 시스템 컴포넌트에 어빌리티 스펙 부여
 
 		OutGrantedAbilitySpecHandles.AddUnique(GiveAbility(AbilitySpec)); // 부여된 어빌리티의 스펙 핸들을 출력 배열에 추가 (중복 방지)
 	}
